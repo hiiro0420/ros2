@@ -4,8 +4,25 @@
 ```sh
 ros2 pkg create --build-type ament_cmake パッケージ名
 ```
-2. srcの中にC++コードを記述
+2. パッケージ内のsrcの中にC++コードを記述 & package.xml,CMakeLists.txtの変更
 ・公式ではpackage.xmlのdescription・maintainer・license タグを必ず入力してくださいとあるがおそらくデフォルトで大丈夫・・・？
+
+
+3. build & 実行
+```sh
+cd /home/ros2/ros2_ws
+colcon build --packages-select cpp_pubsub
+. install/setup.bash
+```
+
+talkerを実行
+```sh
+ros2 run cpp_pubsub talker
+```
+listenerを実行
+```sh
+ros2 run cpp_pubsub listener
+```
 
 ### package.xml
 <buildtool_depend>ament_cmake</buildtool_depend>の下に新しい行を追加して以下の依存関係を追加
@@ -44,20 +61,4 @@ install(TARGETS
   talker
   listener
   DESTINATION lib/${PROJECT_NAME})
-```
-
-3. build & 実行
-```sh
-cd /home/ros2/ros2_ws
-colcon build --packages-select cpp_pubsub
-. install/setup.bash
-```
-
-talkerを実行
-```sh
-ros2 run cpp_pubsub talker
-```
-listenerを実行
-```sh
-ros2 run cpp_pubsub listener
 ```
